@@ -1,0 +1,7 @@
+{
+  "name": "SteamyApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
