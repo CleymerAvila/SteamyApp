@@ -1,0 +1,7 @@
+<ion-list>
+  @for(gameDeal of this.gameDeals; track $index){
+    <ion-item>
+      <app-game-deal-card [gameDeal]="gameDeal" />
+    </ion-item>
+  }
+</ion-list>

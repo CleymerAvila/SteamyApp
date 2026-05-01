@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { Deal, } from 'src/app/core/models';
+import { GameProvider } from 'src/app/shared/services/game-provider';
 
 @Component({
   selector: 'app-deals',
@@ -7,8 +8,17 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['deals.page.scss'],
   standalone: false,
 })
-export class DealsPage {
+export class DealsPage implements OnInit {
+  top5GameDeals!: Deal[];
 
-  constructor() {}
+
+  constructor(private gameProvider: GameProvider) {
+
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.top5GameDeals =  await this.gameProvider.getTop5Deals();
+  }
+
 
 }

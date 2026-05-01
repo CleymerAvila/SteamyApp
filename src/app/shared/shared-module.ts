@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { GameDealCardComponent } from './components/game-deal-card/game-deal-card.component';
+import { GameDealListComponent } from './components/game-deal-list/game-deal-list.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [GameDealCardComponent, GameDealListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
   exports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    GameDealCardComponent,
+    GameDealListComponent
   ]
 })
 export class SharedModule { }

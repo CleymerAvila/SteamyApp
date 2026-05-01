@@ -33,7 +33,7 @@ export class DealMapper {
     };
   }
 
-  static fromApiList(
+  static fromDealApiListToDealList(
     dealApiList: DealApiModel[],
     storeApiList?: StoreApiModel[],
   ): Deal[] {

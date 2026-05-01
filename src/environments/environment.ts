@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://apidocs.cheapshark.com/'
+  API_URL: 'https://www.cheapshark.com/api/1.0/'
 };
 
 /*
