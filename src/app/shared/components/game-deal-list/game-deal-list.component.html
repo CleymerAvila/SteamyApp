@@ -6,7 +6,7 @@
     </ion-list-header>
     @for(gameDeal of this.gameDeals; track gameDeal.id){
       <ion-item>
-        <app-game-deal-card [gameDeal]="gameDeal" />
+        <app-game-deal-card (onDetail)="onDealDetailClick($event)" [gameDeal]="gameDeal" />
       </ion-item>
     }
   </ion-list>
@@ -17,7 +17,7 @@
   <div class="h-scroll-wrapper">
     @for (gameDeal of gameDeals; track gameDeal.id) {
       <div class="h-card-wrapper">
-        <app-game-deal-card [gameDeal]="gameDeal" />
+        <app-game-deal-card (onDetail)="onDealDetailClick($event)" [gameDeal]="gameDeal" />
       </div>
     }
   </div>

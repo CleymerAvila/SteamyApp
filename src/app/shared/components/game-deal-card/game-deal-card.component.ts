@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Deal, GameSummary } from 'src/app/core/models';
 
 @Component({
@@ -9,10 +9,14 @@ import { Deal, GameSummary } from 'src/app/core/models';
 })
 export class GameDealCardComponent  implements OnInit {
   @Input({required: true}) gameDeal!: Deal;
-
+  @Output() onDetail = new EventEmitter<Deal>;
 
   constructor() { }
 
   ngOnInit() {}
 
+
+  onDealDetail(): void {
+    this.onDetail.emit(this.gameDeal);
+  }
 }

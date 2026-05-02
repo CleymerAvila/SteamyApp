@@ -18,12 +18,13 @@
     <ion-searchbar></ion-searchbar>
 
     <app-game-deal-list
-      (click)="openDealDetail()"
+      (onDealDetail)="openDealDetail($event)"
       [gameDeals]="this.top5GameDeals"
       [modeHorizontal]="true"
     />
 
     <app-game-deal-list
+      (onDealDetail)="openDealDetail($event)"
       [gameDeals]="this.gameDeals"
       [modeHorizontal]="false"
     />

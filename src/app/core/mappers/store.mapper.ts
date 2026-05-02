@@ -1,4 +1,4 @@
-import { Store, StoreApiModel } from "../models";
+import { CheaperStore, CheaperStoreApiModel, Store, StoreApiModel } from "../models";
 
 
 export class StoreMapper {
@@ -20,5 +20,18 @@ export class StoreMapper {
 
   public static fromApiList(apiList: StoreApiModel[]): Store[] {
     return apiList.map(store => this.fromApiToModel(store));
+  }
+
+  public static fromCheaperStoreApiToCheaperStore(cheaperStoreApi: CheaperStoreApiModel): CheaperStore {
+    return {
+      dealId: cheaperStoreApi.dealID,
+      storeId: cheaperStoreApi.storeID,
+      salePrice: Number.parseFloat(cheaperStoreApi.salePrice),
+      retailPrice: Number.parseFloat(cheaperStoreApi.retailPrice)
+    }
+  }
+
+  public static fromCheaperStoreApiListToCheaperStoreList(cheaperStoreApiList: CheaperStoreApiModel[]): CheaperStore[] {
+    return cheaperStoreApiList.map((cheaperStoreApi) => this.fromCheaperStoreApiToCheaperStore(cheaperStoreApi))
   }
 }

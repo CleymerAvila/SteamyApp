@@ -64,3 +64,37 @@ export interface GameSearchApiModel {
   external: string; // título del juego
   thumb: string;
 }
+
+// models/api/deal-detail-api.model.ts
+
+export interface DealDetailApiModel {
+  gameInfo: {
+    storeID: string;
+    gameID: string;
+    name: string;
+    steamAppID: string | null;
+    salePrice: string;
+    retailPrice: string;
+    steamRatingText: string | null;
+    steamRatingPercent: string;
+    steamRatingCount: string | null;
+    metacriticScore: string;
+    metacriticLink: string | null;
+    releaseDate: number;
+    publisher: string;         // ← solo viene en el detalle
+    steamworks: string;        // "0" o "1"
+    thumb: string;
+  };
+  cheaperStores: CheaperStoreApiModel[];   // ← solo viene en el detalle
+  cheapestPrice: {                          // ← solo viene en el detalle
+    price: string;
+    date: number;
+  };
+}
+
+export interface CheaperStoreApiModel {
+  dealID: string;
+  storeID: string;
+  salePrice: string;
+  retailPrice: string;
+}

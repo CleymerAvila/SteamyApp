@@ -1,8 +1,8 @@
-import { StoreApiModel } from './../../core/models/api-response.model';
+import { DealDetailApiModel, StoreApiModel } from './../../core/models/api-response.model';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, switchMap } from 'rxjs';
+import { firstValueFrom, Observable, switchMap } from 'rxjs';
 import { DealMapper } from 'src/app/core/mappers/deal.mapper';
-import { Deal, DealApiModel } from 'src/app/core/models';
+import { Deal, DealApiModel, DealDetail } from 'src/app/core/models';
 import { HttpService } from 'src/app/core/services/http.service';
 import { map } from 'rxjs';
 
@@ -37,6 +37,13 @@ export class GameProvider {
     )
 
     return firstValueFrom(deals$);
+  }
+
+  public getDealDetailById(dealId: string): Observable<DealDetail> {
+    const dealDetail$ = this.http.get<DealDetailApiModel>(`deals?id=${dealId}`)
+    .pipe(map(dealDetail => DealMapper.fromDealDetailApiToDealDetail(dealDetail)))
+
+    return dealDetail$;
   }
 
 }

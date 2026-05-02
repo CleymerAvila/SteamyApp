@@ -21,3 +21,40 @@ export interface Deal {
   lastChange: Date;
   thumb: string;
 }
+
+// models/domain/deal-detail.model.ts
+
+export interface CheaperStore {
+  dealId: string;
+  storeId: string;
+  store?: Store;           // relación resuelta opcionalmente
+  salePrice: number;
+  retailPrice: number;
+}
+
+export interface DealDetail {
+  gameInfo: {
+    storeId: string;
+    gameId: string;
+    name: string;
+    steamAppId: string | null;
+    salePrice: number;
+    retailPrice: number;
+    steamRating: {
+      text: string | null;
+      percent: number;
+      count: number | null;
+    };
+    metacriticScore: number | null;
+    metacriticLink: string | null;
+    releaseDate: Date;
+    publisher: string;
+    steamworks: boolean;
+    thumb: string;
+  };
+  cheaperStores: CheaperStore[];
+  cheapestPrice: {
+    price: number;
+    date: Date;
+  };
+}

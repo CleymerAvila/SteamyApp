@@ -23,9 +23,15 @@ export class DealsPage implements OnInit {
     this.gameDeals = await this.gameProvider.getDeals();
   }
 
-  async openDealDetail() {
+  async openDealDetail(deal: Deal) {
+    // this.gameProvider.getDealDetailById(dealId).subscribe(async (dealDetail) => {
+    //   console.log('ESTO ES LO QUE ESTA LLEGANDO AL BUSCAR EL DETALLE: ')
+    //   console.log('Deal Detail:  ', dealDetail)
+
+    // })
     const modal  = await this.modalCtrl.create({
       component: DealDetailComponent,
+      componentProps: { deal },
       cssClass: 'detail-modal',
       breakpoints: [0.95],
       initialBreakpoint: 0.95,
@@ -33,6 +39,7 @@ export class DealsPage implements OnInit {
     })
 
     await modal.present();
+
   }
 
 

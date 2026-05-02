@@ -1,4 +1,4 @@
-import { Deal, DealApiModel, StoreApiModel } from '../models';
+import { Deal, DealApiModel, DealDetail, DealDetailApiModel, StoreApiModel } from '../models';
 import { StoreMapper } from './store.mapper';
 
 export class DealMapper {
@@ -44,5 +44,34 @@ export class DealMapper {
         storeApiList.find((store) => store.storeID === deal.storeID) : undefined,
       ),
     );
+  }
+
+  static fromDealDetailApiToDealDetail(dealDetailApi: DealDetailApiModel): DealDetail {
+    return {
+        gameInfo: {
+          storeId: dealDetailApi.gameInfo.storeID,
+          gameId: dealDetailApi.gameInfo.gameID,
+          name: dealDetailApi.gameInfo.name,
+          steamAppId: dealDetailApi.gameInfo.steamAppID ?? null,
+          salePrice: Number.parseFloat(dealDetailApi.gameInfo.salePrice),
+          retailPrice: Number.parseFloat(dealDetailApi.gameInfo.retailPrice),
+          steamRating: {
+            text: dealDetailApi.gameInfo.steamRatingText,
+            percent: Number.parseInt(dealDetailApi.gameInfo.steamRatingPercent),
+            count: Number.parseInt(dealDetailApi.gameInfo.steamRatingCount!),
+          },
+          metacriticScore: Number.parseInt(dealDetailApi.gameInfo.metacriticScore),
+          metacriticLink: dealDetailApi.gameInfo.metacriticLink,
+          releaseDate: new Date(dealDetailApi.gameInfo.releaseDate * 1000),
+          publisher: dealDetailApi.gameInfo.publisher,
+          steamworks: dealDetailApi.gameInfo.steamworks === '1',
+          thumb: dealDetailApi.gameInfo.thumb
+        },
+        cheaperStores: StoreMapper.fromCheaperStoreApiListToCheaperStoreList(dealDetailApi.cheaperStores),
+        cheapestPrice: {
+          price: Number.parseFloat(dealDetailApi.cheapestPrice.price),
+          date: new Date(dealDetailApi.cheapestPrice.date * 1000),
+        }
+    }
   }
 }

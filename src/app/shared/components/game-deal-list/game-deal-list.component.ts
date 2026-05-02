@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Deal, GameSummary } from 'src/app/core/models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Deal } from 'src/app/core/models';
 
 @Component({
   selector: 'app-game-deal-list',
@@ -10,9 +10,14 @@ import { Deal, GameSummary } from 'src/app/core/models';
 export class GameDealListComponent  implements OnInit {
   @Input({required: true}) gameDeals!: Deal[];
   @Input() modeHorizontal: boolean = false;
+  @Output() onDealDetail = new EventEmitter<Deal>;
 
   constructor() { }
 
   ngOnInit() {}
+
+  onDealDetailClick(deal: Deal): void {
+    this.onDealDetail.emit(deal);
+  }
 
 }
