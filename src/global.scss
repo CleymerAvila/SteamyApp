@@ -35,3 +35,13 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
+
+.detail-modal {
+  --border-radius: 20px 20px 0 0; // Redondea solo las esquinas superiores
+  --background: #ffffff; // Opcional: color de fondo
+
+  /* Asegura que el contenido se ajuste al borde */
+  .modal-wrapper {
+    overflow: hidden;
+  }
+}

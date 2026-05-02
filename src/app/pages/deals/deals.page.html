@@ -18,6 +18,7 @@
     <ion-searchbar></ion-searchbar>
 
     <app-game-deal-list
+      (click)="openDealDetail()"
       [gameDeals]="this.top5GameDeals"
       [modeHorizontal]="true"
     />

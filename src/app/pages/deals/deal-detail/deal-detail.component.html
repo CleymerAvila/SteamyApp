@@ -1,0 +1,75 @@
+<div class="detail-modal">
+  <div class="detail-header-modal">
+    <ion-thumbnail>
+      <img src="https://image.api.playstation.com/vulcan/img/rnd/202010/2217/LsaRVLF2IU2L1FNtu9d3MKLq.jpg" alt="">
+    </ion-thumbnail>
+    <ion-icon
+      (click)="closeModal()"
+      name="close-circle">
+    </ion-icon>
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-grid fixed="true">
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="10">
+            <ion-title>God of War</ion-title>
+          </ion-col>
+          <ion-col size="2">
+            <ion-avatar>
+              <!-- <img src=""> -->
+              <ion-icon name="person" size="large"></ion-icon>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-justify-content-between">
+          <ion-card class="metric-card">
+            <ion-col size="8" class="ion-text-center">
+              <ion-icon name="star" size="medium"></ion-icon>
+              <br>
+              <ion-label>6.6</ion-label>
+              <br>
+              <ion-label>Deal Rating</ion-label>
+            </ion-col>
+          </ion-card>
+          <ion-card class="metric-card">
+            <ion-col size="8" class="ion-text-center">
+              <ion-icon name="game-controller"></ion-icon>
+              <br>
+              <ion-label>
+                93
+              </ion-label>
+              <br>
+              <ion-label>
+                METACRITIC
+              </ion-label>
+            </ion-col>
+          </ion-card>
+        </ion-row>
+        <ion-row>
+          <ion-card class="pricing-card">
+            <ion-col>
+              <div class="price">
+                <ion-card-title>$23.99</ion-card-title>
+                <ion-card-subtitle>$49.99</ion-card-subtitle>
+              </div>
+              <ion-label>You save $52.01 (52%)</ion-label>
+            </ion-col>
+          </ion-card>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button type="button">
+              view deal
+              <ion-icon slot="end" name="open-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</div>
