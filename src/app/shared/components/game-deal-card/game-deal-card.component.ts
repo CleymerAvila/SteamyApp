@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Deal } from 'src/app/core/models';
-import { Preferences } from '@capacitor/preferences';
 import { Subscription } from 'rxjs';
 import { FavoriteService } from '../../services/favorite-service';
 
@@ -19,17 +18,18 @@ export class GameDealCardComponent  implements OnInit, OnDestroy {
   constructor(private favoriteService: FavoriteService) { }
 
   async ngOnInit() {
-    this.sub = this.favoriteService.favoriteId$.subscribe(favoriteId => {
-      this.isFavorite = favoriteId === this.gameDeal.id
+    this.sub = this.favoriteService.favoriteDeal$.subscribe(favoriteDeal => {
+      this.isFavorite = favoriteDeal?.id === this.gameDeal.id
     })
   }
 
   onDealDetail(): void {
     this.onDetail.emit(this.gameDeal);
   }
-  onToggleFavorite(event: Event) {
+  async onToggleFavorite(event: Event) {
     event.stopPropagation();
-    this.favoriteService.toggleFavorite(this.gameDeal.id);
+    await this.ngOnInit();
+    await this.favoriteService.toggleFavorite(this.gameDeal);
   }
 
   ngOnDestroy(): void {

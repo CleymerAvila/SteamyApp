@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Deal } from 'src/app/core/models';
+import { FavoriteService } from 'src/app/shared/services/favorite-service';
 
 @Component({
   selector: 'app-favorite',
@@ -6,8 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['favorite.page.scss'],
   standalone: false,
 })
-export class FavoritePage {
+export class FavoritePage implements OnInit {
+  gameDeal$!: Observable<Deal | null>;
 
-  constructor() {}
+  constructor(private favoriteService: FavoriteService) {}
+
+  ngOnInit(): void {
+    this.gameDeal$ = this.favoriteService.favoriteDeal$;
+    // this.subscribeToChanges();
+  }
+
+  subscribeToChanges() {
+  }
+
+
 
 }

@@ -13,6 +13,14 @@
       </div>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if((gameDeal$ | async); as gameDeal){
+    <ion-card-title>Favorite Game Deal</ion-card-title>
+    <app-game-deal-card
+      [gameDeal]="gameDeal"
+    />
+  } @else {
+    <ion-text>There aren't any favorite game selected</ion-text>
+  }
 
 </ion-content>

@@ -1,29 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Deal } from 'src/app/core/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FavoriteService {
+export class FavoriteService implements OnInit {
   private readonly FAVORITE_KEY = 'favorite';
-  private readonly _favoriteId$ = new BehaviorSubject<string | null>(null);
-  readonly favoriteId$: Observable<string | null> = this._favoriteId$.asObservable();
+  private readonly _favoriteDeal$ = new BehaviorSubject<Deal | null>(null);
+  readonly favoriteDeal$: Observable<Deal | null> = this._favoriteDeal$.asObservable();
 
   constructor(){
-    this.loadFromStorage();
+    this.ngOnInit();
   }
 
-  async toggleFavorite(dealId: string): Promise<void> {
-    const current = this._favoriteId$.getValue();
-    const next = current  === dealId ? null : dealId;
+  async ngOnInit() {
+    await this.loadFromStorage();
+  }
 
-    this._favoriteId$.next(next);
+  async toggleFavorite(deal: Deal): Promise<void> {
+    const current = this._favoriteDeal$.getValue();
+    const next = current  === deal ? null : deal;
+
+    this._favoriteDeal$.next(next);
 
     if(next === null){
       await Preferences.remove({ key:  this.FAVORITE_KEY })
     } else {
-      await Preferences.set({ key: this.FAVORITE_KEY, value: next })
+      await Preferences.set({ key: this.FAVORITE_KEY, value: JSON.stringify(next)})
     }
   }
 
@@ -31,7 +36,8 @@ export class FavoriteService {
     const { value } = await Preferences.get({ key: this.FAVORITE_KEY });
 
     if(value){
-      this._favoriteId$.next(value);
+      const favorite: Deal = JSON.parse(value) as Deal;
+      this._favoriteDeal$.next(favorite);
     }
   }
 
