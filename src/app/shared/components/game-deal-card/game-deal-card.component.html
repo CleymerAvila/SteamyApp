@@ -12,11 +12,14 @@
           <ion-card-title>{{ gameDeal.title }}</ion-card-title>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col>
+      <ion-row class="ion-justify-content-between">
+        <ion-col size="3">
             <ion-avatar>
               <img [src]="gameDeal.store?.images?.logo" alt="">
             </ion-avatar>
+        </ion-col>
+        <ion-col [ngClass]="{'favorite': isFavorite}" (click)="onToggleFavorite($event)" size="3">
+          <ion-icon size="large" name="heart"></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
