@@ -9,6 +9,7 @@ import { Deal, GameSummary } from 'src/app/core/models';
 })
 export class GameDealListComponent  implements OnInit {
   @Input({required: true}) gameDeals!: Deal[];
+  @Input() modeHorizontal: boolean = false;
 
   constructor() { }
 

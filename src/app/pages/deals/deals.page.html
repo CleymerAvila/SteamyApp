@@ -15,9 +15,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header>
     <ion-searchbar></ion-searchbar>
 
-    <app-game-deal-list [gameDeals]="this.top5GameDeals" />
-  </ion-header>
+    <app-game-deal-list
+      [gameDeals]="this.top5GameDeals"
+      [modeHorizontal]="true"
+    />
+
+    <app-game-deal-list
+      [gameDeals]="this.gameDeals"
+      [modeHorizontal]="false"
+    />
 </ion-content>

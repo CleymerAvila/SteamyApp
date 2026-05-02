@@ -10,7 +10,7 @@ import { GameProvider } from 'src/app/shared/services/game-provider';
 })
 export class DealsPage implements OnInit {
   top5GameDeals!: Deal[];
-
+  gameDeals!: Deal[];
 
   constructor(private gameProvider: GameProvider) {
 
@@ -18,6 +18,7 @@ export class DealsPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.top5GameDeals =  await this.gameProvider.getTop5Deals();
+    this.gameDeals = await this.gameProvider.getDeals();
   }
 
 
