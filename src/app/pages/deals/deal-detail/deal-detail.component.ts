@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Deal, DealDetail } from 'src/app/core/models';
+import { Deal} from 'src/app/core/models';
+import { Browser } from '@capacitor/browser'
 
 @Component({
   selector: 'app-deal-detail',
@@ -9,6 +10,8 @@ import { Deal, DealDetail } from 'src/app/core/models';
   standalone: false,
 })
 export class DealDetailComponent  implements OnInit {
+
+  protected readonly REDIRECT_URL = 'https://www.cheapshark.com/redirect'
 
   @Input() deal!: Deal;
   loading: boolean = false;
@@ -19,6 +22,9 @@ export class DealDetailComponent  implements OnInit {
 
   }
 
+  async openSite() {
+    await Browser.open({url: `${this.REDIRECT_URL}?dealID=${this.deal.id}`});
+  }
   closeModal(): void {
     this.modalCtrl.dismiss();
   }
