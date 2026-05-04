@@ -43,7 +43,6 @@ public class WidgetUpdateService extends JobService {
   private static final String WIDGET_PREFS = "WidgetPrefs";
 
   private static final long INTERVAL_MS = 5000L;
-  private static final int NOTIF_ID = 1001;
 
   private Handler handler;
   private Runnable carrouselRunnable;
@@ -295,18 +294,6 @@ public class WidgetUpdateService extends JobService {
       } catch (Exception e) { return null; }
     }
   }
-
-//  private void renderGame(Game game, int page){
-//    AppWidgetManager manager = AppWidgetManager.getInstance(this);
-//    @SuppressLint("RemoteViewLayout") RemoteViews views = new RemoteViews(getPackageName(), R.layout.game_widget);
-//    // ✅ Título e imagen de fondo
-//    int idTitle      = page == 0 ? R.id.tv_title_0      : R.id.tv_title_1;
-//    views.setTextViewText(idTitle, game.getTitle());
-//    if (game.getThumb() != null)
-//      views.setImageViewBitmap(R.id.img_background, game.getThumb());
-//
-//    Log.d("WIDGET_DEBUG" , "render game: " + game + "title: "  + game.getTitle() + " Game Thumbnail " + game.getThumb());
-//  }
 
   private void renderGameDeal(GameDeal gameDeal, int page){
     if(widgetId == AppWidgetManager.INVALID_APPWIDGET_ID) return;;
