@@ -15,6 +15,7 @@ export class FavoritePage implements OnInit {
   protected readonly REDIRECT_URL = 'https://www.cheapshark.com/redirect'
   gameDeal$!: Observable<Deal | null>;
   game$!: Observable<Game | null>;
+  loading = true;
 
 
   constructor(private favoriteService: FavoriteService, private gameProvider: GameProvider) {}

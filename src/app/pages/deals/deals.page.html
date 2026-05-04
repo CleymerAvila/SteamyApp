@@ -27,17 +27,46 @@
       <ion-card-title> Searched Game Deals  </ion-card-title>
       <app-game-deal-list [gameDeals]="searchedDeals" />
     } @else {
-      <app-game-deal-list
-        (onDealDetail)="openDealDetail($event)"
-        [gameDeals]="this.top5GameDeals"
-        [modeHorizontal]="true"
-      />
 
-      <app-game-deal-list
-        (onDealDetail)="openDealDetail($event)"
-        [gameDeals]="this.gameDeals"
-        [modeHorizontal]="false"
-      />
+      @if(loading){
+        <ion-list-header>
+          <ion-title>Hot Top Deals</ion-title>
+        </ion-list-header>
+        <div class="h-scroll-wrapper">
+          @for(_ of '12234'; track $index){
+            <div class="h-card-wrapper">
+              <app-game-deal-card-skeleton>
+              </app-game-deal-card-skeleton>
+            </div>
+          }
+        </div>
+        } @else {
+          <app-game-deal-list
+            (onDealDetail)="openDealDetail($event)"
+            [gameDeals]="this.top5GameDeals"
+            [modeHorizontal]="true"
+          />
+        }
+
+      @if (loading) {
+          <ion-list-header>
+            <ion-title>
+              Available Deals
+            </ion-title>
+          </ion-list-header>
+          <ion-list class="ion-padding">
+            @for (_ of '1290293'; track $index) {
+                <app-game-deal-card-skeleton />
+            }
+          </ion-list>
+      } @else {
+        <app-game-deal-list
+          (onDealDetail)="openDealDetail($event)"
+          [gameDeals]="this.gameDeals"
+          [modeHorizontal]="false"
+        />
+      }
+
     }
 
 

@@ -1,0 +1,51 @@
+<!-- game-deal-card-skeleton.component.html -->
+<ion-card class="ion-padding">
+  <ion-card-header>
+    <ion-thumbnail>
+      <ion-skeleton-text [animated]="true" />
+    </ion-thumbnail>
+    <div>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <ion-skeleton-text [animated]="true" style="width: 70%; height: 14px;" />
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-avatar>
+            <ion-skeleton-text [animated]="true" style="width: 40%; height: 12px; margin-top: 6px;" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-skeleton-text [animated]="true" style="width: 40%; height: 12px; margin-top: 6px;" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="divider-container">
+            <div class="line"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <ion-skeleton-text [animated]="true" style="width: 40%; height: 12px; margin-top: 6px;" />
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            <ion-skeleton-text [animated]="true" style="width: 40%; height: 12px; margin-top: 6px;" />
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

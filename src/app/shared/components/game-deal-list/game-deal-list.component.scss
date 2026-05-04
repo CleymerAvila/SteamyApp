@@ -1,6 +1,6 @@
 
 ion-list {
-  margin: 10px;
+  margin: 30px;
 }
 
 .h-scroll-wrapper {
@@ -24,7 +24,6 @@ ion-list {
 }
 
 .h-card-wrapper {
-  // margin: 0px 10px 0px;
   flex-shrink: 0;     // evita que las cards se compriman
   width: 280px;
   &:first-child {
@@ -33,7 +32,7 @@ ion-list {
 
   &:last-child {
     margin-right: 20px;
-  }      // ancho fijo por card — ajusta al tamaño de tu card
+  }
 }
 
 

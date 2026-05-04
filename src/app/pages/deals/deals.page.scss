@@ -18,3 +18,44 @@ ion-avatar {
 ion-icon {
   color: #fff;
 }
+
+// ion-list {
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   margin: 30px;
+// }
+
+.h-scroll-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  // -webkit-overflow-scrolling: touch; // scroll inercial en iOS
+  scrollbar-width: none;             // oculta scrollbar en Firefox
+  padding: 4px 3px 8px;             // espacio para que no se corte la sombra de las cards
+  width: 100%;
+  box-shadow: none;
+
+  &::-webkit-scrollbar {
+    display: none;                   // oculta scrollbar en Chrome/Safari
+  }
+
+
+}
+
+.h-card-wrapper {
+  // margin: 0px 10px 0px;
+  flex-shrink: 0;     // evita que las cards se compriman
+  width: 280px;
+  &:first-child {
+    margin-left: 20px;
+  }
+
+  &:last-child {
+    margin-right: 20px;
+  }      // ancho fijo por card — ajusta al tamaño de tu card
+}
+

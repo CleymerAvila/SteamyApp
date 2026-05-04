@@ -17,7 +17,7 @@ export class DealsPage implements OnInit, OnDestroy {
   private searchTerm$ = new Subject<string>;
   private destroy$ = new Subject<void>;
   searchedDeals: Deal[] = [];
-  loading = false;
+  loading = true;
   error: string = '';
   constructor(private gameProvider: GameProvider, private modalCtrl: ModalController) {
 
@@ -26,6 +26,7 @@ export class DealsPage implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     this.top5GameDeals =  await this.gameProvider.getTop5Deals();
     this.gameDeals = await this.gameProvider.getDeals();
+    this.loading = false;
     this.subscribeToSearchChanges();
   }
 
@@ -52,11 +53,12 @@ export class DealsPage implements OnInit, OnDestroy {
       switchMap(query => {
         if (!query || query.trim().length < 2) {
           this.searchedDeals = [];
+          this.loading = false;
           return of([]);
         }
-        this.loading = true;
         return this.gameProvider.getDealsBySearch(query).pipe(
           catchError(() => {
+            this.loading = false;
             this.error = 'Error al buscar. Intenta de nuevo.';
             return of([]);
           })
@@ -72,6 +74,7 @@ export class DealsPage implements OnInit, OnDestroy {
         this.searchedDeals = results;
         this.loading = false;
       }
+      this.loading = false;
     });
   }
 
