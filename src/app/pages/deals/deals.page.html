@@ -15,17 +15,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-searchbar></ion-searchbar>
 
-    <app-game-deal-list
-      (onDealDetail)="openDealDetail($event)"
-      [gameDeals]="this.top5GameDeals"
-      [modeHorizontal]="true"
+    <ion-searchbar
+      placeholder="Search for game"
+      (ionInput)="onSearch($event)"
+      debounce="0"
     />
 
-    <app-game-deal-list
-      (onDealDetail)="openDealDetail($event)"
-      [gameDeals]="this.gameDeals"
-      [modeHorizontal]="false"
-    />
+
+    @if(this.searchedDeals.length > 0){
+      <ion-card-title> Searched Game Deals  </ion-card-title>
+      <app-game-deal-list [gameDeals]="searchedDeals" />
+    } @else {
+      <app-game-deal-list
+        (onDealDetail)="openDealDetail($event)"
+        [gameDeals]="this.top5GameDeals"
+        [modeHorizontal]="true"
+      />
+
+      <app-game-deal-list
+        (onDealDetail)="openDealDetail($event)"
+        [gameDeals]="this.gameDeals"
+        [modeHorizontal]="false"
+      />
+    }
+
+
 </ion-content>
