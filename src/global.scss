@@ -45,3 +45,54 @@
     overflow: hidden;
   }
 }
+
+ion-content, ion-toolbar {
+  --background: radial-gradient(at 0% 0%, #100f15 0, transparent 50%),
+                radial-gradient(at 50% 0%, #2f3e6a 0, transparent 50%),
+                radial-gradient(at 100% 0%, #9f2a28 0, transparent 50%);
+  background-color: #0b0c15; /* Color base oscuro */
+  --color: #fff;
+}
+
+ion-title, ion-label {
+  --color: #fff;
+}
+
+ion-card-title {
+  color: #fff;
+}
+
+.glass-item {
+  --background: transparent; /* Quita el fondo de Ionic */
+  margin: 20px;
+  // background: rgba(255, 255, 255, 0.1) !important;
+  // backdrop-filter: blur(10px);
+  // -webkit-backdrop-filter: blur(10px);
+  // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  // margin-bottom: 8px; /* Separación para que se note el efecto */
+}
+
+
+.glass-card {
+  /* Fondo semitransparente (blanco o negro) */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  /* Desenfoque de fondo - EL EFECTO CLAVE */
+  -webkit-backdrop-filter: blur(10px); /* Soporte para Safari/iOS */
+  backdrop-filter: blur(10px);
+
+  /* Bordes suaves y borde superior claro para efecto de luz */
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* Sombra suave */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  /* Asegurar que el contenido sea legible */
+  color: #fff;
+  padding: 16px;
+}

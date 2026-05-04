@@ -18,3 +18,23 @@ ion-avatar {
 ion-icon {
   color: #fff;
 }
+
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+
+  /* Añadir el efecto a la toolbar */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Opcional: añadir un borde inferior */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ion-card.glass-card {
+  --background: transparent;
+}
+
+ion-content {
+  --background: transparent;
+}

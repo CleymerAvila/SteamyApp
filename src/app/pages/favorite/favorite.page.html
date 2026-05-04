@@ -38,14 +38,14 @@
           @if(game.deals.length > 0){
             <ion-row>
               <ion-col>
-                <ion-label>Available Deals </ion-label>
+                <ion-title>Available Deals </ion-title>
               </ion-col>
             </ion-row>
 
             @for(deal of game.deals; track $index){
               <ion-row>
                 <ion-col>
-                  <ion-card>
+                  <ion-card class="glass-card">
                     <ion-card-content>
                       <ion-grid>
                         <ion-row>

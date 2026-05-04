@@ -11,21 +11,30 @@
           </ion-avatar>
         </div>
       </div>
+  
+      <ion-searchbar
+        placeholder="Search for game"
+        (ionInput)="onSearch($event)"
+        debounce="0"
+      />
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-    <ion-searchbar
-      placeholder="Search for game"
-      (ionInput)="onSearch($event)"
-      debounce="0"
-    />
-
 
     @if(this.searchedDeals.length > 0){
-      <ion-card-title> Searched Game Deals  </ion-card-title>
-      <app-game-deal-list [gameDeals]="searchedDeals" />
+
+      @if(!loadingSearch){
+        <ion-card-title> Searched Game Deals  </ion-card-title>
+        <app-game-deal-list [gameDeals]="searchedDeals" />
+      } @else {
+        <ion-list class="ion-padding" style="background: transparent;">
+          @for (_ of '1290293'; track $index) {
+              <app-game-deal-card-skeleton />
+          }
+        </ion-list>
+      }
     } @else {
 
       @if(loading){
@@ -54,7 +63,7 @@
               Available Deals
             </ion-title>
           </ion-list-header>
-          <ion-list class="ion-padding">
+          <ion-list class="ion-padding" style="background: transparent;">
             @for (_ of '1290293'; track $index) {
                 <app-game-deal-card-skeleton />
             }

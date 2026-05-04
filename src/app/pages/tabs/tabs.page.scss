@@ -1,1 +1,32 @@
+ion-tabs {
+  background: inherit;
+  border: none;
+}
 
+ion-tab-bar {
+  --background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.05)
+  );
+  margin: 10px 10px;
+
+
+  ion-tab-button {
+    --background: transparent;
+  }
+  /* Desenfoque de fondo - EL EFECTO CLAVE */
+  // -webkit-backdrop-filter: blur(10px); /* Soporte para Safari/iOS */
+  backdrop-filter: blur(20px);
+
+  /* Bordes suaves y borde superior claro para efecto de luz */
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* Sombra suave */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  /* Asegurar que el contenido sea legible */
+  color: #fff;
+  padding: 5px;
+}

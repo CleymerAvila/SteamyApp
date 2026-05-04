@@ -18,6 +18,7 @@ export class DealsPage implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>;
   searchedDeals: Deal[] = [];
   loading = true;
+  loadingSearch = false;
   error: string = '';
   constructor(private gameProvider: GameProvider, private modalCtrl: ModalController) {
 
@@ -26,6 +27,7 @@ export class DealsPage implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     this.top5GameDeals =  await this.gameProvider.getTop5Deals();
     this.gameDeals = await this.gameProvider.getDeals();
+    this.searchedDeals = [];
     this.loading = false;
     this.subscribeToSearchChanges();
   }
@@ -53,12 +55,12 @@ export class DealsPage implements OnInit, OnDestroy {
       switchMap(query => {
         if (!query || query.trim().length < 2) {
           this.searchedDeals = [];
-          this.loading = false;
+          this.loadingSearch = false;
           return of([]);
         }
         return this.gameProvider.getDealsBySearch(query).pipe(
           catchError(() => {
-            this.loading = false;
+            this.loadingSearch = false;
             this.error = 'Error al buscar. Intenta de nuevo.';
             return of([]);
           })
@@ -69,19 +71,23 @@ export class DealsPage implements OnInit, OnDestroy {
       console.log('Results : ' + results)
       if(results.length === 0){
         this.searchedDeals = results;
-        this.loading = false;
       } else {
         this.searchedDeals = results;
-        this.loading = false;
       }
-      this.loading = false;
+      this.loadingSearch = false;
     });
   }
 
   onSearch(event: any){
     const query = event.target.value;
-    console.log(query)
-    this.searchTerm$.next(query)
+
+    if(query && query.trim() != ''){
+      this.loadingSearch = true;
+      console.log(query)
+      this.searchTerm$.next(query)
+    } else {
+      this.ngOnInit();
+    }
   }
 
   ngOnDestroy(): void {

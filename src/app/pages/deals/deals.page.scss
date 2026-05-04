@@ -5,6 +5,20 @@
   justify-content: space-between;
 }
 
+ion-searchbar {
+  // --background: transparent;
+  --background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  /* Desenfoque de fondo - EL EFECTO CLAVE */
+  -webkit-backdrop-filter: blur(10px); /* Soporte para Safari/iOS */
+  backdrop-filter: blur(10px);
+  color: #fff;
+  --border-radius: 20px ;
+}
 
 ion-avatar {
   display: flex;

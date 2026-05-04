@@ -58,7 +58,13 @@ export class GameProvider {
 
   public getDealsBySearch(query: string): Observable<Deal[]> {
     return this.http.get<DealApiModel[]>(`deals?title=${query}`)
-          .pipe(map(dealsApi => DealMapper.fromDealApiListToDealList(dealsApi)))
+    .pipe(
+      switchMap((dealsApi) => {
+        return this.http.get<StoreApiModel[]>('stores').pipe(
+          map((storesApi) => DealMapper.fromDealApiListToDealList(dealsApi, storesApi))
+        )
+      })
+    )
   }
 
   public getDealDetailById(dealId: string): Observable<DealDetail> {
