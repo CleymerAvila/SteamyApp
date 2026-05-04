@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Deal } from 'src/app/core/models';
 import { Subscription } from 'rxjs';
 import { FavoriteService } from '../../services/favorite-service';
@@ -9,7 +9,7 @@ import { FavoriteService } from '../../services/favorite-service';
   styleUrls: ['./game-deal-card.component.scss'],
   standalone: false,
 })
-export class GameDealCardComponent  implements OnInit, OnDestroy {
+export class GameDealCardComponent  implements OnChanges, OnDestroy {
   @Input({required: true}) gameDeal!: Deal;
   @Output() onDetail = new EventEmitter<Deal>;
   isFavorite: boolean = false;
@@ -17,10 +17,14 @@ export class GameDealCardComponent  implements OnInit, OnDestroy {
 
   constructor(private favoriteService: FavoriteService) { }
 
-  async ngOnInit() {
-    this.sub = this.favoriteService.favoriteDeal$.subscribe(favoriteDeal => {
-      this.isFavorite = favoriteDeal?.id === this.gameDeal.id
-    })
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['gameDeal'] && this.gameDeal?.id) {
+      this.sub?.unsubscribe();
+
+      this.sub = this.favoriteService.favoriteDeal$.subscribe(favoriteDeal => {
+        this.isFavorite = favoriteDeal?.gameId === this.gameDeal.gameId;
+      });
+    }
   }
 
   onDealDetail(): void {
@@ -28,7 +32,6 @@ export class GameDealCardComponent  implements OnInit, OnDestroy {
   }
   async onToggleFavorite(event: Event) {
     event.stopPropagation();
-    await this.ngOnInit();
     await this.favoriteService.toggleFavorite(this.gameDeal);
   }
 

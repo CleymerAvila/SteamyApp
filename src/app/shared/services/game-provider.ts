@@ -1,10 +1,11 @@
-import { DealDetailApiModel, StoreApiModel } from './../../core/models/api-response.model';
+import { DealDetailApiModel, GameApiModel, GameDealApiModel, StoreApiModel } from './../../core/models/api-response.model';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, Observable, switchMap } from 'rxjs';
+import { firstValueFrom, Observable, pipe, switchMap } from 'rxjs';
 import { DealMapper } from 'src/app/core/mappers/deal.mapper';
-import { Deal, DealApiModel, DealDetail } from 'src/app/core/models';
+import { Deal, DealApiModel, DealDetail, Game, GameDeal } from 'src/app/core/models';
 import { HttpService } from 'src/app/core/services/http.service';
 import { map } from 'rxjs';
+import { GameMapper } from 'src/app/core/mappers/game.mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,22 @@ export class GameProvider {
     )
 
     return firstValueFrom(deals$);
+  }
+
+  public async getGameById(gameId: string): Promise<Game> {
+    const game$ = this.http.get<GameApiModel>(`games?id=${gameId}`) // ← GameApiModel, no Game
+    .pipe(
+      switchMap((gameApi) => {
+        return this.http.get<StoreApiModel[]>('stores').pipe(
+          map((storesApi) => {
+            const deals = GameMapper.gameDealApiListToGameDealList(gameApi.deals, storesApi);
+            return GameMapper.mapFromGameApiModelToGame(gameApi, deals); // ← mapea el objeto completo
+          })
+        );
+      })
+    );
+
+    return firstValueFrom(game$);
   }
 
   public getDealsBySearch(query: string): Observable<Deal[]> {

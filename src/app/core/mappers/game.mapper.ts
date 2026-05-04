@@ -8,6 +8,7 @@ import {
   GameSummary,
   Store,
   StoreApiModel,
+  Deal,
 } from "../models";
 import { StoreMapper } from "./store.mapper";
 
@@ -33,7 +34,8 @@ export class GameMapper {
   public static gameDealApiToGameDeal(gameDealApi: GameDealApiModel, storeApi?: StoreApiModel): GameDeal {
     return {
       storeId: gameDealApi.storeID,
-      store:  storeApi ? StoreMapper.fromApiToModel(storeApi)  : undefined,
+      store: storeApi ?
+      StoreMapper.fromApiToModel(storeApi): undefined,
       dealId: gameDealApi.dealID,
       price: Number.parseFloat(gameDealApi.price),
       retailPrice: Number.parseFloat(gameDealApi.retailPrice),
@@ -41,13 +43,18 @@ export class GameMapper {
     }
   }
 
-  public static gameDealApiListToGameDealList(gameDealApiList: GameDealApiModel[]): GameDeal[] {
-    return gameDealApiList.map((gameDealApi) => this.gameDealApiToGameDeal(gameDealApi));
+  public static gameDealApiListToGameDealList(gameDealApiList: GameDealApiModel[], storeApiList?: StoreApiModel[]): GameDeal[] {
+    return gameDealApiList.map((gameDealApi) =>
+      this.gameDealApiToGameDeal(
+        gameDealApi,
+        storeApiList ?
+        storeApiList.find((store) => store.storeID === gameDealApi.storeID) : undefined,
+      )
+    );
   }
 
-  public static mapFromGameApiModelToGame( gameApiModel: GameApiModel, gameId?: string): Game {
+  public static mapFromGameApiModelToGame( gameApiModel: GameApiModel, deals?: GameDeal[]): Game {
     return {
-      id: gameId ? gameId : undefined,
       title: gameApiModel.info.title,
       steamAppId: gameApiModel.info.steamAppID ?? null,
       thumb: gameApiModel.info.thumb,
@@ -55,7 +62,7 @@ export class GameMapper {
         price:  Number.parseFloat(gameApiModel.cheapestPriceEver.price),
         date: new Date(gameApiModel.cheapestPriceEver.date * 1000),
       },
-      deals: this.gameDealApiListToGameDealList(gameApiModel.deals)
+      deals: deals ?? this.gameDealApiListToGameDealList(gameApiModel.deals)
     }
   }
 

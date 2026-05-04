@@ -22,6 +22,10 @@ export class DealDetailComponent  implements OnInit {
 
   }
 
+  showSavingPercent(savings: number): number{
+    return Math.floor(savings)
+  }
+
   async openSite() {
     await Browser.open({url: `${this.REDIRECT_URL}?dealID=${this.deal.id}`});
   }
