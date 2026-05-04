@@ -11,7 +11,7 @@
           </ion-avatar>
         </div>
       </div>
-  
+
       <ion-searchbar
         placeholder="Search for game"
         (ionInput)="onSearch($event)"
@@ -23,17 +23,19 @@
 <ion-content [fullscreen]="true">
 
 
-    @if(this.searchedDeals.length > 0){
+    @if(this.searchedDeals.length > 0 || loadingSearch){
 
-      @if(!loadingSearch){
-        <ion-card-title> Searched Game Deals  </ion-card-title>
-        <app-game-deal-list [gameDeals]="searchedDeals" />
-      } @else {
+      @if(loadingSearch){
         <ion-list class="ion-padding" style="background: transparent;">
           @for (_ of '1290293'; track $index) {
               <app-game-deal-card-skeleton />
           }
         </ion-list>
+      } @else if(searchedDeals.length > 0) {
+        <ion-card-title> Searched Game Deals  </ion-card-title>
+        <app-game-deal-list [gameDeals]="searchedDeals" />
+      } @else {
+        <ion-title>no hay busqueda disponible</ion-title>
       }
     } @else {
 
@@ -49,13 +51,13 @@
             </div>
           }
         </div>
-        } @else {
+      } @else if(this.top5GameDeals.length > 0) {
           <app-game-deal-list
             (onDealDetail)="openDealDetail($event)"
             [gameDeals]="this.top5GameDeals"
             [modeHorizontal]="true"
           />
-        }
+      }
 
       @if (loading) {
           <ion-list-header>
@@ -68,15 +70,17 @@
                 <app-game-deal-card-skeleton />
             }
           </ion-list>
+      } @else if(hasError) {
+        <app-no-content-state></app-no-content-state>
+      } @else if(this.gameDeals.length === 0){
+        <app-no-content-state></app-no-content-state>
+
       } @else {
-        <app-game-deal-list
-          (onDealDetail)="openDealDetail($event)"
-          [gameDeals]="this.gameDeals"
-          [modeHorizontal]="false"
-        />
+          <app-game-deal-list
+            (onDealDetail)="openDealDetail($event)"
+            [gameDeals]="this.gameDeals"
+            [modeHorizontal]="false"
+          />
+        }
       }
-
-    }
-
-
 </ion-content>

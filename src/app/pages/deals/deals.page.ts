@@ -19,6 +19,7 @@ export class DealsPage implements OnInit, OnDestroy {
   searchedDeals: Deal[] = [];
   loading = true;
   loadingSearch = false;
+  hasError = false;
   error: string = '';
   constructor(private gameProvider: GameProvider, private modalCtrl: ModalController) {
 
@@ -27,6 +28,12 @@ export class DealsPage implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     this.top5GameDeals =  await this.gameProvider.getTop5Deals();
     this.gameDeals = await this.gameProvider.getDeals();
+
+    if(!this.top5GameDeals || !this.gameDeals){
+      this.hasError = true;
+    } else if(this.top5GameDeals && this.gameDeals){
+      this.hasError = false;
+    }
     this.searchedDeals = [];
     this.loading = false;
     this.subscribeToSearchChanges();
@@ -56,11 +63,13 @@ export class DealsPage implements OnInit, OnDestroy {
         if (!query || query.trim().length < 2) {
           this.searchedDeals = [];
           this.loadingSearch = false;
+          this.hasError = false;
           return of([]);
         }
         return this.gameProvider.getDealsBySearch(query).pipe(
           catchError(() => {
             this.loadingSearch = false;
+            this.hasError = true;
             this.error = 'Error al buscar. Intenta de nuevo.';
             return of([]);
           })
@@ -75,6 +84,7 @@ export class DealsPage implements OnInit, OnDestroy {
         this.searchedDeals = results;
       }
       this.loadingSearch = false;
+      this.hasError = false;
     });
   }
 
