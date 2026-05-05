@@ -33,7 +33,11 @@
         </ion-list>
       } @else if(searchedDeals.length > 0) {
         <ion-card-title> Searched Game Deals  </ion-card-title>
-        <app-game-deal-list [gameDeals]="searchedDeals" />
+        <app-game-deal-list
+            (onDealDetail)="openDealDetail($event)"
+            [gameDeals]="this.searchedDeals"
+            [modeHorizontal]="false"
+          />
       } @else {
         <ion-title>no hay busqueda disponible</ion-title>
       }
