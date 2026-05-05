@@ -33,12 +33,12 @@ ion-icon {
   color: #fff;
 }
 
-// ion-list {
-//   display: flex;
-//   flex-direction: column;
-//   width: 100%;
-//   margin: 30px;
-// }
+ion-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 30px;
+}
 
 .h-scroll-wrapper {
   display: flex;
@@ -57,9 +57,11 @@ ion-icon {
     display: none;                   // oculta scrollbar en Chrome/Safari
   }
 
-
 }
 
+ion-card-title {
+  margin: 30px 0px 10px 30px;
+}
 .h-card-wrapper {
   // margin: 0px 10px 0px;
   flex-shrink: 0;     // evita que las cards se compriman

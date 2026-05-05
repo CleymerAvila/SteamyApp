@@ -1,15 +1,15 @@
 
-// ion-list {
-//   --background: transparent !important;
-//   margin: 10px;
-// }
+ion-list {
+  --background: transparent !important;
+  margin: 10px;
+}
 
 
 
 .h-scroll-wrapper {
   display: flex;
   flex-direction: row;
-  margin: auto;
+  // margin: 10px;
   gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;

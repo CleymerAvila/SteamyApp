@@ -21,22 +21,23 @@
       <app-game-deal-card [gameDeal]="gameDeal"></app-game-deal-card>
 
       @if((game$ | async ); as game){
+        <br>
         <ion-title> Game Complete Info </ion-title>
-        <ion-grid>
-          <ion-row>
+        <ion-grid fixed="true">
+          <ion-row class="ion-text-start">
             <ion-col><ion-label>Cheapest price Ever</ion-label></ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col><ion-label>Price</ion-label></ion-col>
-            <ion-col><ion-label>${{ game.cheapestPriceEver.price }}</ion-label></ion-col>
+          <ion-row class="ion-justify-content-between">
+            <ion-col class="ion-text-start" size="4"><ion-label>Price</ion-label></ion-col>
+            <ion-col class="ion-text-end" size="4"><ion-label>${{ game.cheapestPriceEver.price }}</ion-label></ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col><ion-label>Date</ion-label></ion-col>
-            <ion-col><ion-label>{{ game.cheapestPriceEver.date | date: 'short' }}</ion-label></ion-col>
+          <ion-row class="ion-justify-content-between">
+            <ion-col class="ion-text-start"><ion-label>Date</ion-label></ion-col>
+            <ion-col class="ion-text-end"><ion-label>{{ game.cheapestPriceEver.date | date: 'short' }}</ion-label></ion-col>
           </ion-row>
 
           @if(game.deals.length > 0){
-            <ion-row>
+            <ion-row class="title">
               <ion-col>
                 <ion-title>Available Deals </ion-title>
               </ion-col>
@@ -45,20 +46,20 @@
             @for(deal of game.deals; track $index){
               <ion-row>
                 <ion-col>
-                  <ion-card class="glass-card">
+                  <ion-card class="glass-card deal-card">
                     <ion-card-content>
                       <ion-grid>
-                        <ion-row>
-                          <ion-col>{{ deal.price }}</ion-col>
+                        <ion-row class="ion-justify-content-between ion-align-items-center">
+                          <ion-col class="price">{{ deal.price }}</ion-col>
                           <ion-avatar>
                             <img [src]="deal.store?.images?.logo" alt="">
                           </ion-avatar>
                         </ion-row>
-                        <ion-row>
-                          <ion-col>
+                        <ion-row class="ion-justify-content-between ion-align-items-center">
+                          <ion-col class="ion-text-start retail-price">
                             {{ deal.retailPrice }}
                           </ion-col>
-                          <ion-col>
+                          <ion-col class="ion-text-end savings">
                             {{ showSavingPercent(deal.savings)}}%
                           </ion-col>
                         </ion-row>

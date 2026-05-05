@@ -5,14 +5,49 @@
   justify-content: space-between;
 }
 
+ion-label {
+  margin: 50px 10px;
+}
 
+.title {
+  margin-top: 30px;
+}
+// ion-avatar {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 5px;
+//   background-color: blue;
+// }
 ion-avatar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  background-color: blue;
+  width: 40px;
+  height: 40px;
+}
+
+.price {
+  color: green;
+  font-size: 18px;
+}
+
+.retail-price {
+  color: gray;
+  font-size: 16px;
+  text-decoration: line-through;
+}
+
+.savings {
+  color: red;
+  font-size: 16px;
+}
+
+.deal-card {
+  width: 90%;
+  height: 180px;
+}
+
+ion-button {
+  width: 100%;
 }
 
 ion-icon {
