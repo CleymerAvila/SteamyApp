@@ -12,6 +12,7 @@ import { FavoriteService } from '../../services/favorite-service';
 export class GameDealCardComponent  implements OnChanges, OnDestroy {
   @Input({required: true}) gameDeal!: Deal;
   @Output() onDetail = new EventEmitter<Deal>;
+  @Input() isHorizontal = false;
   isFavorite: boolean = false;
   private sub!: Subscription;
 

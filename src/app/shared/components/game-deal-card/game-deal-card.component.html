@@ -1,4 +1,4 @@
-<ion-card (click)="onDealDetail()" class="glass-card">
+<ion-card (click)="onDealDetail()" class="glass-card" [ngClass]="{'horizontal' : this.isHorizontal}">
   <ion-card-header>
     <ion-thumbnail>
       <img [src]="gameDeal.thumb">
@@ -29,7 +29,7 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-between">
+      <ion-row class="ion-justify-content-between ion-align-items-start">
         <ion-col size="3">
           <ion-icon name="star"></ion-icon>
           {{gameDeal.dealRating}}

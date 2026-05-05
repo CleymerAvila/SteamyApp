@@ -1,24 +1,30 @@
-
 @if(!modeHorizontal){
-  <ion-list lines="none" style="background: transparent;">
-    <ion-list-header>
-      <ion-title>Available Deals</ion-title>
-    </ion-list-header>
-    @for(gameDeal of this.gameDeals; track gameDeal.id){
-      <ion-item class="glass-item">
-        <app-game-deal-card (onDetail)="onDealDetailClick($event)" [gameDeal]="gameDeal" />
-      </ion-item>
-    }
-  </ion-list>
-} @else {
+<ion-list lines="none" style="background: transparent">
   <ion-list-header>
-    <ion-title>Hot Top Deals</ion-title>
+    <ion-title>Available Deals</ion-title>
   </ion-list-header>
-  <div class="h-scroll-wrapper">
-    @for (gameDeal of gameDeals; track gameDeal.id) {
-      <div class="h-card-wrapper">
-        <app-game-deal-card (onDetail)="onDealDetailClick($event)" [gameDeal]="gameDeal" />
-      </div>
-    }
+  @for(gameDeal of this.gameDeals; track gameDeal.id){
+  <ion-item class="glass-item">
+    <app-game-deal-card
+      (onDetail)="onDealDetailClick($event)"
+      [gameDeal]="gameDeal"
+      [isHorizontal]="true"
+    />
+  </ion-item>
+  }
+</ion-list>
+} @else {
+<ion-list-header>
+  <ion-title>Hot Top Deals</ion-title>
+</ion-list-header>
+<div class="h-scroll-wrapper">
+  @for (gameDeal of gameDeals; track gameDeal.id) {
+  <div class="h-card-wrapper">
+    <app-game-deal-card
+      (onDetail)="onDealDetailClick($event)"
+      [gameDeal]="gameDeal"
+    />
   </div>
+  }
+</div>
 }

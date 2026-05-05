@@ -16,19 +16,20 @@
   // -webkit-overflow-scrolling: touch; // scroll inercial en iOS
   scrollbar-width: none;             // oculta scrollbar en Firefox
   padding: 4px 3px 8px;             // espacio para que no se corte la sombra de las cards
-  width: 100%;
+  width: 90%;
   box-shadow: none;
 
   &::-webkit-scrollbar {
     display: none;                   // oculta scrollbar en Chrome/Safari
   }
 
-
 }
 
 .h-card-wrapper {
-  flex-shrink: 0;     // evita que las cards se compriman
-  width: 280px;
+  // flex-shrink: 0;     // evita que las cards se compriman
+  // width: 280px;
+  // margin: 0 20px;
+  // min-width: 200px;
   &:first-child {
     margin-left: 20px;
   }
